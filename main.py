@@ -35,7 +35,7 @@ def dobas(dobasok, db=10, cinkelt=False):
         if not cinkelt:
             szam = int(random() * 6) + 1
         else:
-            szam = int(random() * 12) + 1
+            szam = int(random() * 7) + 1
             if szam > 6:
                 szam = 6
         i += 1
@@ -81,13 +81,29 @@ def ugyanaz_ketszer(dobasok):
     else:
         print("Nem volt ismétlődő dobás.")
 
+def sorozat_keres(dobasok):
+    leghosszabb_sorozat = 0
+    leghosszabb_sorozat_dobas = 0
+    if len(dobasok) > 0:
+        sor_hossz = 1  # ebben tároljuk, hogy milyen hosszú volt a sorozat
+        i = 1
+        while i < len(dobasok):
+            if dobasok[i] == dobasok[i - 1]:
+                sor_hossz += 1
+            else:
+                if leghosszabb_sorozat < sor_hossz:
+                    leghosszabb_sorozat = sor_hossz
+                    leghosszabb_sorozat_dobas = dobasok[i - 1]
+                sor_hossz = 1
+            i += 1
+    print(f"A leghosszabb sorozat {leghosszabb_sorozat} dobásból állt, a {leghosszabb_sorozat_dobas}. kockát dobtuk.")
+
 
 # 7. feladat
-def sorozat_keres(dobasok):
+def sorozat_keres2(dobasok):
     sor_szam = []  # ebben tároljuk, hogy melyik számot figyeljük
     sor_hossz = []  # ebben tároljuk, hogy milyen hosszú volt a sorozat
     sor_futo = []  # ebben tároljuk, hogy az adott sorozat még fut-e (bool típusú)
-
 
     i = 0
     while i < len(dobasok):
@@ -142,12 +158,12 @@ def statisztikak(dobasok):
     sorozat_keres(dobasok)
 
 
-dobas_szam = 100
+dobas_szam = 20
 
-dobasok = []
-dobas(dobasok, dobas_szam)
-print(dobasok)
-statisztikak(dobasok)
+# dobasok = []
+# dobas(dobasok, dobas_szam)
+# print(dobasok)
+# statisztikak(dobasok)
 
 # kiürítjük a dobás listát, cinkelten dobunk
 print("** Cinkelt kockás dobások **")
